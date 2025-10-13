@@ -1,12 +1,21 @@
 'use client';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Logo from '@/app/assets/lendsqr.svg';
 import LoginImage from '@/app/assets/log-in.svg';
 import './login.scss';
 
 const LoginPage = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // login logic here
+
+    router.push('/dashboard');
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -30,7 +39,7 @@ const LoginPage = () => {
           <h1>Welcome!</h1>
           <p>Enter details to login.</p>
 
-          <form>
+          <form onSubmit={handleLogin}>
             <div className='form-group'>
               <input type='email' id='email' placeholder='Email' required />
             </div>
