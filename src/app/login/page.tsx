@@ -1,10 +1,17 @@
+'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '@/app/assets/lendsqr.svg';
 import LoginImage from '@/app/assets/log-in.svg';
 import './login.scss';
 
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className='login-page'>
       {/* Left side - illustration */}
@@ -30,12 +37,17 @@ const LoginPage = () => {
 
             <div className='form-group password-group'>
               <input
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 id='password'
                 placeholder='Password'
                 required
               />
-              <span className='show-btn'>SHOW</span>
+              <button
+                onClick={togglePasswordVisibility}
+                className={`show-btn ${showPassword ? 'active' : ''}`}
+              >
+                {showPassword ? 'HIDE' : 'SHOW'}
+              </button>
             </div>
 
             <a href='#' className='forgot-password'>

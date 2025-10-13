@@ -18,22 +18,10 @@ $font: 'Avenir Next', 'Inter', sans-serif;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    padding: 2rem 2rem;
+    padding: 6rem 6rem;
 
     .logo {
       margin-bottom: 6rem;
-
-      img {
-        width: 173px;
-        height: auto;
-      }
-    }
-
-    .illustration {
-      flex: 1;
-      display: flex;
-      align-items: start;
-      justify-content: center;
     }
 
     @media (max-width: 960px) {
@@ -48,7 +36,7 @@ $font: 'Avenir Next', 'Inter', sans-serif;
     align-items: center;
 
     padding: 2rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
 
     .form-container {
       width: 100%;
@@ -111,6 +99,12 @@ $font: 'Avenir Next', 'Inter', sans-serif;
               user-select: none;
               letter-spacing: 0.1em;
             }
+          }
+        }
+
+        .show-btn {
+          &.active {
+            color: darken($primary-color, 10%);
           }
         }
 
