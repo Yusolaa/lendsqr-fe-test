@@ -20,7 +20,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
 
       p {
         font-size: 0.75rem;
@@ -60,6 +60,7 @@
   .table-container {
     background: #fff;
     border-radius: 8px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
     border: 1px solid #e5e5e5;
     padding: 1rem;
     overflow-x: auto;
@@ -75,7 +76,12 @@
         font-weight: 600;
         padding: 1rem 0.75rem;
       }
-
+      .data-row {
+        &:hover {
+          cursor: pointer;
+          background-color: #e2e2e2;
+        }
+      }
       td {
         padding: 1rem 0.75rem;
         font-size: 0.875rem;
@@ -110,10 +116,40 @@
         }
       }
 
-      .dots {
-        cursor: pointer;
-        color: #213f7d;
-        font-size: 1rem;
+      .dropdown-modal {
+        position: absolute;
+        width: 8rem;
+        top: -110%;
+        right: 0;
+        background: #fff;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        padding: 0.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        z-index: 100;
+
+        button {
+          background: none;
+          border: none;
+          text-align: left;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.4rem;
+          font-size: 0.7rem;
+
+          cursor: pointer;
+          color: #213f7d;
+          border-radius: 4px;
+          transition: background 0.2s;
+
+          &:hover {
+            background-color: #f0f4ff;
+          }
+        }
       }
     }
 
@@ -178,23 +214,22 @@
     }
   }
   .page-number {
-  background: transparent;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  &.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+    background: transparent;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    &.active {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
   }
-}
-.page-button[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
+  .page-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .skeleton-table {
