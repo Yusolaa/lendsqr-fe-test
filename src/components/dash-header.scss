@@ -5,19 +5,19 @@ $border-color: #e5e5e5;
 $white: #ffffff;
 
 .app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  place-items: center;
   padding: 1rem;
-  position: sticky;
-  top: 0;
 
   .header-content {
     display: flex;
     align-items: center;
-    justify-content: space-around;
     gap: 2rem;
   }
 
-  // Search Form
-  .search-form {
+  .search-bar {
     flex: 1;
     max-width: 400px;
   }
@@ -80,14 +80,12 @@ $white: #ffffff;
     color: $white;
   }
 
-  // Header Actions
   .header-actions {
     display: flex;
     align-items: center;
     gap: 3.125rem;
   }
 
-  // Docs Link
   .docs-link {
     color: $dark-blue;
     font-size: 1rem;
@@ -101,7 +99,6 @@ $white: #ffffff;
     }
   }
 
-  // Notification Button
   .notification-button {
     background: none;
     border: none;
@@ -124,7 +121,6 @@ $white: #ffffff;
     color: $dark-blue;
   }
 
-  // User Profile
   .user-profile {
     display: flex;
     align-items: center;
@@ -179,7 +175,6 @@ $white: #ffffff;
   }
 }
 
-// Responsive Design
 @media (max-width: 1024px) {
   .app-header {
     padding: 1.25rem 1.5rem;

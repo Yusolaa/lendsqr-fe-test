@@ -5,25 +5,34 @@ import Image from 'next/image';
 import Logo from '@/app/assets/lendsqr.svg';
 import LoginImage from '@/app/assets/log-in.svg';
 import './login.scss';
+import { Loader2 } from 'lucide-react';
 
 const LoginPage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // login logic here
 
-    router.push('/dashboard');
+    if (isLoggingIn) return;
+    setIsLoggingIn(true);
+
+    // Simulate a login delay
+    setTimeout(() => {
+      setIsLoggingIn(false);
+      router.push('/dashboard');
+    }, 2000);
   };
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = (e: React.MouseEvent) => {
+    e.preventDefault();
     setShowPassword(!showPassword);
   };
 
   return (
     <div className='login-page'>
-      {/* Left side - illustration */}
+      {/* Left section */}
       <div className='left-section'>
         <div className='logo'>
           <Image src={Logo} alt='Lendsqr Logo' priority />
@@ -33,7 +42,7 @@ const LoginPage = () => {
         </div>
       </div>
 
-      {/* Right side - form */}
+      {/* Right section */}
       <div className='right-section'>
         <div className='form-container'>
           <h1>Welcome!</h1>
@@ -63,8 +72,12 @@ const LoginPage = () => {
               FORGOT PASSWORD?
             </a>
 
-            <button type='submit' className='login-button'>
-              LOG IN
+            <button
+              type='submit'
+              className='login-button'
+              disabled={isLoggingIn}
+            >
+              {isLoggingIn ? <Loader2 className='loader' /> : 'LOG IN'}
             </button>
           </form>
         </div>

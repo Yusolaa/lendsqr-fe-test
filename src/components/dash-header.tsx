@@ -7,12 +7,15 @@ interface HeaderProps {
   userAvatar?: string;
 }
 
-export function Header({ userName = 'Adedeji', userAvatar }: HeaderProps) {
+export function HeaderComponent({
+  userName = 'Lendsqr',
+  userAvatar,
+}: HeaderProps) {
   return (
     <header className='app-header'>
       <div className='header-content'>
         {/* Search Form */}
-        <form className='search-form'>
+        <form className='search-bar'>
           <div className='search-wrapper'>
             <input
               type='search'

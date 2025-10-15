@@ -1,0 +1,232 @@
+.users-page {
+  .title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #213f7d;
+  }
+
+  .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+      p {
+        font-size: 0.75rem;
+        color: #545f7d;
+        margin-top: 1rem;
+        letter-spacing: 1px;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        color: #213f7d;
+        font-weight: 600;
+      }
+
+      .icon {
+        font-size: 1.8rem;
+
+        &.purple {
+          color: #9b51e0;
+        }
+
+        &.blue {
+          color: #4285f4;
+        }
+
+        &.orange {
+          color: #f2994a;
+        }
+
+        &.pink {
+          color: #eb5757;
+        }
+      }
+    }
+  }
+
+  .table-container {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    padding: 1rem;
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th {
+        text-align: left;
+        font-size: 0.75rem;
+        color: #545f7d;
+        font-weight: 600;
+        padding: 1rem 0.75rem;
+      }
+
+      td {
+        padding: 1rem 0.75rem;
+        font-size: 0.875rem;
+        color: #213f7d;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-weight: 500;
+        text-transform: capitalize;
+
+        &.active {
+          background-color: #f3fcf6;
+          color: #39cd62;
+        }
+
+        &.inactive {
+          background-color: #f8f8f8;
+          color: #545f7d;
+        }
+
+        &.pending {
+          background-color: #fff7e5;
+          color: #e9b200;
+        }
+
+        &.blacklisted {
+          background-color: #fce6e6;
+          color: #e4033b;
+        }
+      }
+
+      .dots {
+        cursor: pointer;
+        color: #213f7d;
+        font-size: 1rem;
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #545f7d;
+
+      .page-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        button {
+          background: none;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          padding: 0.3rem 0.6rem;
+          cursor: pointer;
+
+          &.active {
+            background-color: #213f7d;
+            color: #fff;
+          }
+
+          &:hover {
+            background-color: #f0f4ff;
+          }
+        }
+      }
+    }
+  }
+
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 0.5rem;
+    color: #213f7d;
+
+    p {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .loader {
+      width: 32px;
+      height: 32px;
+      color: #213f7d;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+  .page-number {
+  background: transparent;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  &.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+}
+.page-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+}
+
+.skeleton-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  padding: 1rem;
+
+  .skeleton-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem;
+  }
+
+  .skeleton-cell {
+    height: 1.1rem;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #f6f7f8, #edeef1, #f6f7f8);
+    background-size: 200% 100%;
+    animation: shimmer 1.3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}

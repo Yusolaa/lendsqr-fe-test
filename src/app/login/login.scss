@@ -138,6 +138,25 @@ $font: 'Avenir Next', 'Inter', sans-serif;
           &:hover {
             background: darken($primary-color, 5%);
           }
+
+          &:disabled {
+            background-color: #a0a0a0;
+            cursor: not-allowed;
+          }
+
+          .loader {
+            width: 20px;
+            height: 20px;
+            color: #ffffff;
+            animation: spin 1s linear infinite;
+            margin: auto;
+          }
+        }
+
+        @keyframes spin {
+          to {
+            transform: rotate(360deg);
+          }
         }
       }
     }

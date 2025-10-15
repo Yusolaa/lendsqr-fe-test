@@ -36,6 +36,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import './app-sidebar.scss';
+import Link from 'next/link';
 
 const navData = {
   main: [
@@ -55,13 +56,13 @@ const navData = {
     {
       title: 'Users',
       icon: Users,
-      url: '#',
+      url: '/dashboard/users',
       isActive: true,
     },
     {
       title: 'Guarantors',
       icon: UsersRound,
-      url: '#',
+      url: '/dashboard/guarantors',
     },
     {
       title: 'Loans',
@@ -174,13 +175,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             {navData.main.map((item) => (
               <SidebarMenuItem key={item.title} className='sidebar-menu-item'>
                 <SidebarMenuButton asChild className='sidebar-menu-button'>
-                  <a href={item.url} className='sidebar-link'>
+                  <Link href={item.url} className='sidebar-link'>
                     <item.icon className='sidebar-icon' />
                     <span className='sidebar-text'>{item.title}</span>
                     {item.hasDropdown && (
                       <ChevronDown className='sidebar-dropdown-icon' />
                     )}
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
@@ -203,10 +204,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       item.isActive ? 'active' : ''
                     }`}
                   >
-                    <a href={item.url} className='sidebar-link'>
+                    <Link href={item.url} className='sidebar-link'>
                       <item.icon className='sidebar-icon' />
                       <span className='sidebar-text'>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -224,10 +225,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               {navData.businesses.map((item) => (
                 <SidebarMenuItem key={item.title} className='sidebar-menu-item'>
                   <SidebarMenuButton asChild className='sidebar-menu-button'>
-                    <a href={item.url} className='sidebar-link'>
+                    <Link href={item.url} className='sidebar-link'>
                       <item.icon className='sidebar-icon' />
                       <span className='sidebar-text'>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -245,10 +246,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               {navData.settings.map((item) => (
                 <SidebarMenuItem key={item.title} className='sidebar-menu-item'>
                   <SidebarMenuButton asChild className='sidebar-menu-button'>
-                    <a href={item.url} className='sidebar-link'>
+                    <Link href={item.url} className='sidebar-link'>
                       <item.icon className='sidebar-icon' />
                       <span className='sidebar-text'>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
