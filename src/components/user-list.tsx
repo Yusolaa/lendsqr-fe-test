@@ -2,10 +2,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { parseISO, format } from 'date-fns';
-import { Eye, UserCheck, UserMinus } from 'lucide-react';
+import { Eye, SlidersHorizontal, UserCheck, UserMinus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import UserListSkeleton from './user-list-skeleton';
-import '../app/dashboard/users/users.scss';
+import UserFilter from './user-filter';
+import './user-list.scss';
 
 interface User {
   id: number;
@@ -19,14 +20,17 @@ interface User {
 
 export default function UserList() {
   const [users, setUsers] = useState<User[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeModal, setActiveModal] = useState<number | null>(null);
+  const [showFilter, setShowFilter] = useState(false);
   const usersPerPage = 10;
   const API = process.env.NEXT_PUBLIC_API_URL!;
   const modalRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
+  // Fetch users
   useEffect(() => {
     const cachedUsers = localStorage.getItem('users');
     if (cachedUsers) {
@@ -34,7 +38,6 @@ export default function UserList() {
       setLoading(false);
     }
 
-    // Fetch fresh data anyway (revalidate)
     fetch(API)
       .then((res) => res.json())
       .then((data) => {
@@ -49,6 +52,7 @@ export default function UserList() {
       });
   }, [API]);
 
+  // Close modal on outside click
   useEffect(() => {
     const closeModal = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
@@ -58,19 +62,6 @@ export default function UserList() {
     document.addEventListener('mousedown', closeModal);
     return () => document.removeEventListener('mousedown', closeModal);
   }, []);
-
-  if (loading) return <UserListSkeleton />;
-
-  // Pagination
-  const totalPages = Math.ceil(users.length / usersPerPage);
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
-  const goToPage = (page: number) => {
-    if (page < 1 || page > totalPages) return;
-    setCurrentPage(page);
-  };
 
   // Date formatting
   const formatDate = (dateString: string) => {
@@ -87,14 +78,65 @@ export default function UserList() {
     }
   };
 
-  // Navigate to user details page
+  // Handle filter logic
+  const handleFilter = (filters: any) => {
+    const result = users.filter((u) => {
+      return (
+        (!filters.organization || u.organization === filters.organization) &&
+        (!filters.username ||
+          u.username.toLowerCase().includes(filters.username.toLowerCase())) &&
+        (!filters.email ||
+          u.email.toLowerCase().includes(filters.email.toLowerCase())) &&
+        (!filters.phoneNumber || u.phoneNumber.includes(filters.phoneNumber)) &&
+        (!filters.status || u.status === filters.status)
+      );
+    });
+    setFilteredUsers(result);
+    setCurrentPage(1);
+  };
+
+  const handleReset = () => {
+    setFilteredUsers([]);
+    setCurrentPage(1);
+  };
+
+  const displayedUsers = filteredUsers.length ? filteredUsers : users;
+
+  // Pagination
+  const totalPages = Math.ceil(displayedUsers.length / usersPerPage);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = displayedUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+  const goToPage = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
+
+  // Navigate to user details
   const viewUserDetails = (user: User) => {
     localStorage.setItem('selectedUser', JSON.stringify(user));
     router.push(`/dashboard/users/${user.id}`);
   };
 
+  if (loading) return <UserListSkeleton />;
+
   return (
     <div className='table-container'>
+      <div className='filter-header'>
+        <button
+          className='filter-toggle'
+          onClick={() => setShowFilter(!showFilter)}
+        >
+          <SlidersHorizontal size={16} />
+          <span>Filter</span>
+        </button>
+      </div>
+
+      {showFilter && (
+        <UserFilter onFilter={handleFilter} onReset={handleReset} />
+      )}
+
       <table className='user-table'>
         <thead>
           <tr>
@@ -128,7 +170,6 @@ export default function UserList() {
                     setActiveModal(activeModal === user.id ? null : user.id);
                   }}
                 />
-
                 {activeModal === user.id && (
                   <div ref={modalRef} className='dropdown-modal'>
                     <button onClick={() => viewUserDetails(user)}>
@@ -151,10 +192,12 @@ export default function UserList() {
         </tbody>
       </table>
 
+      {/* Pagination */}
       <div className='pagination'>
         <p>
           Showing {indexOfFirstUser + 1}–
-          {Math.min(indexOfLastUser, users.length)} of {users.length} users
+          {Math.min(indexOfLastUser, displayedUsers.length)} of{' '}
+          {displayedUsers.length} users
         </p>
 
         <div className='page-controls'>
