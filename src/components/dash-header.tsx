@@ -15,32 +15,29 @@ export function HeaderComponent({
     <header className='app-header'>
       <div className='header-content'>
         {/* Search Form */}
-        <form className='search-bar'>
-          <div className='search-wrapper'>
-            <input
-              type='search'
-              placeholder='Search for anything'
-              className='search-input'
-            />
-            <button type='submit' className='search-button'>
-              <Search className='search-icon' />
-            </button>
-          </div>
-        </form>
+        <div>
+          <form className='search-bar'>
+            <div className='search-wrapper'>
+              <input
+                type='search'
+                placeholder='Search for anything'
+                className='search-input'
+              />
+              <button type='submit' className='search-button'>
+                <Search className='search-icon' />
+              </button>
+            </div>
+          </form>
+        </div>
 
         {/* Right Side Actions */}
         <div className='header-actions'>
-          {/* Docs Link */}
           <a href='#' className='docs-link'>
             Docs
           </a>
-
-          {/* Notification Bell */}
           <button className='notification-button'>
             <Bell className='bell-icon' />
           </button>
-
-          {/* User Profile */}
           <div className='user-profile'>
             <div className='user-avatar'>
               {userAvatar ? (

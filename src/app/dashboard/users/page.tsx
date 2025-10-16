@@ -7,7 +7,7 @@ export default function UserPage() {
     <div className='users-page'>
       <h2 className='title'>Users</h2>
 
-      <div className='stats-cards'>
+      <div className='stats-cards '>
         <div className='card'>
           <FaUsers className='icon purple' />
           <p>USERS</p>

@@ -1,46 +1,47 @@
 .dashboard {
   display: flex;
   height: 100vh;
-  width: 100%;
-  background-color: #f9fafb;
   font-family: 'Inter', sans-serif;
   color: #1a1a1a;
+  overflow: hidden;
 
   .sidebar {
-    width: 250px;
+    width: 260px;
     background-color: #ffffff;
     border-right: 1px solid #e5e7eb;
     transition: width 0.3s ease;
-
     &.collapsed {
       width: 80px;
     }
   }
 
   .sidebar-inset {
-    flex: 1;
+    display: flex;
     flex-direction: column;
+    flex: 1;
     background-color: #f4f6f8;
-    overflow: auto;
+    overflow-y: auto;
 
-    header {
+    .dashboard-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: space-between;
+      gap: 0.75rem;
       height: 64px;
-      padding: 0 1rem;
+      padding: 0 1.5rem;
       border-bottom: 1px solid #e5e7eb;
-      background-color: #fff;
+      background-color: #ffffff;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      z-index: 10;
+      position: sticky;
+      top: 0;
 
       .sidebar-trigger {
-        margin-left: -4px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 8px;
-        border-radius: 6px;
+        border-radius: 8px;
         transition: background-color 0.2s ease;
 
         &:hover {
@@ -49,19 +50,13 @@
       }
     }
 
-    .content {
+    .dashboard-content {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-
-      .main-section {
-        flex: 1;
-        min-height: 100vh;
-        border-radius: 1rem;
-        background-color: #f4f6f8;
-        padding: 4rem;
-      }
+      gap: 1.5rem;
+      padding: 2rem 2.5rem;
+      background-color: #f9fafb;
     }
   }
 
@@ -76,17 +71,13 @@
     }
 
     .sidebar-inset {
-      header {
+      .dashboard-header {
         height: 56px;
-        padding: 0 0.75rem;
+        padding: 0 1rem;
       }
 
-      .content {
-        padding: 0.75rem;
-
-        .top-cards {
-          grid-template-columns: 1fr;
-        }
+      .dashboard-content {
+        padding: 1rem;
       }
     }
   }

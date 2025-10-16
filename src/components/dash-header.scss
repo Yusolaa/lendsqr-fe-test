@@ -5,15 +5,12 @@ $border-color: #e5e5e5;
 $white: #ffffff;
 
 .app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  place-items: center;
   padding: 1rem;
 
   .header-content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
   }
 
@@ -83,7 +80,7 @@ $white: #ffffff;
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 3.125rem;
+    gap: 2rem;
   }
 
   .docs-link {
@@ -183,7 +180,7 @@ $white: #ffffff;
       gap: 1rem;
     }
 
-    .search-form {
+    .search-bar {
       max-width: 300px;
     }
 
@@ -201,7 +198,7 @@ $white: #ffffff;
   .app-header {
     padding: 1rem;
 
-    .search-form {
+    .search-bar {
       display: none;
     }
 

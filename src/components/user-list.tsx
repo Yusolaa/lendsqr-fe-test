@@ -156,7 +156,7 @@ export default function UserList() {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.phoneNumber}</td>
-              <td className='trauncate'>{formatDate(user.dateJoined)}</td>
+              <td className='truncate'>{formatDate(user.dateJoined)}</td>
               <td>
                 <span className={`status ${user.status.toLowerCase()}`}>
                   {user.status}
