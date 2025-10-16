@@ -26,7 +26,6 @@ $green: #39cdcc;
     }
   }
 
-  // Page Header
   .page-header {
     display: flex;
     align-items: center;
@@ -77,7 +76,6 @@ $green: #39cdcc;
     }
   }
 
-  // User Summary Card
   .user-summary-card {
     background: #ffffff;
     border-radius: 4px;
@@ -152,7 +150,6 @@ $green: #39cdcc;
     }
   }
 
-  // Tab Navigation
   .tab-navigation {
     display: flex;
     border-top: 1px solid $border-color;
@@ -191,7 +188,6 @@ $green: #39cdcc;
     }
   }
 
-  // Details Content
   .details-content {
     background: #ffffff;
     border-radius: 4px;
@@ -257,7 +253,6 @@ $green: #39cdcc;
   }
 }
 
-// Responsive Design
 @media (max-width: 1024px) {
   .user-details-page {
     padding: 1.5rem;
