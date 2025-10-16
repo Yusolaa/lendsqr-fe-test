@@ -8,6 +8,14 @@ import UserListSkeleton from './user-list-skeleton';
 import UserFilter from './user-filter';
 import './user-list.scss';
 
+interface UserFilters {
+  organization?: string;
+  username?: string;
+  email?: string;
+  phoneNumber?: string;
+  status?: string;
+}
+
 interface User {
   id: number;
   organization: string;
@@ -30,7 +38,6 @@ export default function UserList() {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
-  // Fetch users
   useEffect(() => {
     const cachedUsers = localStorage.getItem('users');
     if (cachedUsers) {
@@ -40,7 +47,7 @@ export default function UserList() {
 
     fetch(API)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: User[]) => {
         setUsers(data);
         setLoading(false);
         localStorage.setItem('users', JSON.stringify(data));
@@ -52,7 +59,6 @@ export default function UserList() {
       });
   }, [API]);
 
-  // Close modal on outside click
   useEffect(() => {
     const closeModal = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
@@ -63,7 +69,6 @@ export default function UserList() {
     return () => document.removeEventListener('mousedown', closeModal);
   }, []);
 
-  // Date formatting
   const formatDate = (dateString: string) => {
     if (!dateString) return '—';
     const cleaned = dateString.replace(
@@ -78,18 +83,25 @@ export default function UserList() {
     }
   };
 
-  // Handle filter logic
-  const handleFilter = (filters: any) => {
+  const handleFilter = (filters: UserFilters) => {
     const result = users.filter((u) => {
-      return (
-        (!filters.organization || u.organization === filters.organization) &&
-        (!filters.username ||
-          u.username.toLowerCase().includes(filters.username.toLowerCase())) &&
-        (!filters.email ||
-          u.email.toLowerCase().includes(filters.email.toLowerCase())) &&
-        (!filters.phoneNumber || u.phoneNumber.includes(filters.phoneNumber)) &&
-        (!filters.status || u.status === filters.status)
-      );
+      const orgMatch =
+        !filters.organization || u.organization === filters.organization;
+
+      const userMatch =
+        !filters.username ||
+        u.username.toLowerCase().includes(filters.username.toLowerCase());
+
+      const emailMatch =
+        !filters.email ||
+        u.email.toLowerCase().includes(filters.email.toLowerCase());
+
+      const phoneMatch =
+        !filters.phoneNumber || u.phoneNumber.includes(filters.phoneNumber);
+
+      const statusMatch = !filters.status || u.status === filters.status;
+
+      return orgMatch && userMatch && emailMatch && phoneMatch && statusMatch;
     });
     setFilteredUsers(result);
     setCurrentPage(1);
@@ -102,7 +114,6 @@ export default function UserList() {
 
   const displayedUsers = filteredUsers.length ? filteredUsers : users;
 
-  // Pagination
   const totalPages = Math.ceil(displayedUsers.length / usersPerPage);
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -113,7 +124,6 @@ export default function UserList() {
     setCurrentPage(page);
   };
 
-  // Navigate to user details
   const viewUserDetails = (user: User) => {
     localStorage.setItem('selectedUser', JSON.stringify(user));
     router.push(`/dashboard/users/${user.id}`);
@@ -192,7 +202,6 @@ export default function UserList() {
         </tbody>
       </table>
 
-      {/* Pagination */}
       <div className='pagination'>
         <p>
           Showing {indexOfFirstUser + 1}–

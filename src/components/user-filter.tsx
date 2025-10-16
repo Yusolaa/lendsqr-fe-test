@@ -2,13 +2,22 @@
 import { useState } from 'react';
 import './user-filter.scss';
 
-interface Filter {
-  onFilter: (filters: any) => void;
+interface FilterState {
+  organization: string;
+  username: string;
+  email: string;
+  date: string;
+  phoneNumber: string;
+  status: string;
+}
+
+interface FilterProps {
+  onFilter: (filters: FilterState) => void;
   onReset: () => void;
 }
 
-export default function UserFilter({ onFilter, onReset }: Filter) {
-  const [filters, setFilters] = useState({
+export default function UserFilter({ onFilter, onReset }: FilterProps) {
+  const [filters, setFilters] = useState<FilterState>({
     organization: '',
     username: '',
     email: '',
@@ -24,6 +33,7 @@ export default function UserFilter({ onFilter, onReset }: Filter) {
   };
 
   const handleFilter = () => onFilter(filters);
+
   const handleReset = () => {
     setFilters({
       organization: '',

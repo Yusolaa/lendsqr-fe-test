@@ -101,7 +101,7 @@ const UserDetails = () => {
           </div>
           <div className='divider'></div>
           <div className='user-tier'>
-            <p className='tier-label'>User's Tier</p>
+            <p className='tier-label'>User&apos;s Tier</p>
             <div className='tier-stars'>
               {[...Array(maxTier)].map((_, index) =>
                 index < userTier ? (
