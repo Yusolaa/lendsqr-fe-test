@@ -102,12 +102,6 @@ $font: 'Avenir Next', 'Inter', sans-serif;
           }
         }
 
-        .show-btn {
-          &.active {
-            color: darken($primary-color, 10%);
-          }
-        }
-
         .forgot-password {
           text-decoration: none;
           color: $primary-color;
@@ -134,10 +128,6 @@ $font: 'Avenir Next', 'Inter', sans-serif;
           transition: background 0.3s ease;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-
-          &:hover {
-            background: darken($primary-color, 5%);
-          }
 
           &:disabled {
             background-color: #a0a0a0;
