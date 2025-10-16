@@ -62,7 +62,7 @@ const navData = {
     {
       title: 'Guarantors',
       icon: UsersRound,
-      url: '#',
+      url: '/dashboard/guarantors',
     },
     {
       title: 'Loans',
@@ -162,11 +162,6 @@ const navData = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const logout = () => {
-    localStorage.clear();
-    window.location.href = '/login';
-  };
-
   return (
     <Sidebar {...props} className='app-sidebar'>
       <SidebarHeader className='sidebar-header'>
@@ -269,10 +264,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenuButton
                 asChild
                 className='sidebar-menu-button'
-                onClick={logout}
+                onClick={() => {
+                  localStorage.clear();
+                  window.location.href = '/login';
+                }}
               >
-                <LogOut className='sidebar-icon' />
-                <span className='sidebar-text'>Logout</span>
+                <button className='sidebar-link'>
+                  <LogOut className='sidebar-icon' />
+                  <span className='sidebar-text'>Logout</span>
+                </button>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
