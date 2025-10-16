@@ -1,0 +1,342 @@
+$primary-color: #39cdcc;
+$dark-blue: #213f7d;
+$text-color: #545f7d;
+$light-gray: #f5f5f5;
+$border-color: #e5e5e5;
+$red: #e4033b;
+$green: #39cdcc;
+
+.user-details-page {
+  margin: 0 auto;
+
+  // Back Button
+  .back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: none;
+    border: none;
+    color: $text-color;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    margin-bottom: 2rem;
+
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $dark-blue;
+    }
+  }
+
+  // Page Header
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: $dark-blue;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1.25rem;
+
+      button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        border-radius: 8px;
+        border: 1px solid;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.2s ease;
+        letter-spacing: 0.5px;
+
+        &.blacklist-btn {
+          color: $red;
+          border-color: $red;
+          background: transparent;
+
+          &:hover {
+            background: rgba(228, 3, 59, 0.1);
+          }
+        }
+
+        &.activate-btn {
+          color: $green;
+          border-color: $green;
+          background: transparent;
+
+          &:hover {
+            background: rgba(57, 205, 204, 0.1);
+          }
+        }
+      }
+    }
+  }
+
+  // User Summary Card
+  .user-summary-card {
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.04);
+    margin-bottom: 2rem;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+  }
+
+  .user-info-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1.875rem;
+
+    .user-avatar {
+      width: 6.25rem;
+      height: 6.25rem;
+      border-radius: 50%;
+      background: rgba(33, 63, 125, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $dark-blue;
+      flex-shrink: 0;
+    }
+
+    .user-basic-info {
+      .user-name {
+        font-size: 1.375rem;
+        font-weight: 500;
+        color: $dark-blue;
+        margin-bottom: 0.5rem;
+      }
+
+      .user-id {
+        font-size: 0.875rem;
+        color: $text-color;
+      }
+    }
+
+    .divider {
+      width: 1px;
+      height: 4rem;
+      background: rgba(33, 63, 125, 0.1);
+    }
+
+    .user-tier {
+      .tier-label {
+        font-size: 0.875rem;
+        color: $text-color;
+        margin-bottom: 0.5rem;
+      }
+
+      .tier-stars {
+        display: flex;
+        gap: 0.25rem;
+      }
+    }
+
+    .user-balance {
+      .balance-amount {
+        font-size: 1.375rem;
+        font-weight: 500;
+        color: $dark-blue;
+        margin-bottom: 0.5rem;
+      }
+
+      .bank-info {
+        font-size: 0.75rem;
+        color: $text-color;
+      }
+    }
+  }
+
+  // Tab Navigation
+  .tab-navigation {
+    display: flex;
+    border-top: 1px solid $border-color;
+
+    .tab-button {
+      flex: 1;
+      padding: 1rem;
+      background: none;
+      border: none;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 1rem;
+      font-weight: 400;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &.active {
+        color: $primary-color;
+        opacity: 1;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: $primary-color;
+        }
+      }
+    }
+  }
+
+  // Details Content
+  .details-content {
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.04);
+    padding: 2rem 1.875rem;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+  }
+
+  .info-section {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: $dark-blue;
+      margin-bottom: 1.875rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem 1.5rem;
+    }
+
+    .info-item {
+      .info-label {
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: $text-color;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.5px;
+      }
+
+      .info-value {
+        font-size: 1rem;
+        font-weight: 500;
+        color: $text-color;
+      }
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    color: $text-color;
+    padding: 3rem;
+    font-size: 1rem;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1rem;
+    color: $text-color;
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .user-details-page {
+    padding: 1.5rem;
+
+    .user-info-section {
+      flex-wrap: wrap;
+      gap: 1.5rem;
+
+      .divider {
+        display: none;
+      }
+    }
+
+    .tab-navigation {
+      overflow-x: auto;
+
+      .tab-button {
+        white-space: nowrap;
+        font-size: 0.875rem;
+        padding: 0.875rem 1rem;
+      }
+    }
+
+    .info-section {
+      .info-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .user-details-page {
+    padding: 1rem;
+
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .page-title {
+        font-size: 1.25rem;
+      }
+
+      .action-buttons {
+        width: 100%;
+
+        button {
+          flex: 1;
+          font-size: 0.75rem;
+          padding: 0.625rem 1rem;
+        }
+      }
+    }
+
+    .user-info-section {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.5rem 1rem;
+
+      .user-avatar {
+        width: 5rem;
+        height: 5rem;
+      }
+    }
+
+    .details-content {
+      padding: 1.5rem 1rem;
+    }
+
+    .info-section {
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+  }
+}

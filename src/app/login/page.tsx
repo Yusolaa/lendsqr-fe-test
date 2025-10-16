@@ -17,12 +17,7 @@ const LoginPage = () => {
 
     if (isLoggingIn) return;
     setIsLoggingIn(true);
-
-    // Simulate a login delay
-    setTimeout(() => {
-      setIsLoggingIn(false);
-      router.push('/dashboard');
-    }, 2000);
+    router.push('/dashboard/users');
   };
 
   const togglePasswordVisibility = (e: React.MouseEvent) => {

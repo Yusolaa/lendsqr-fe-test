@@ -1,10 +1,11 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import UserListSkeleton from './user-list-skeleton';
 import { parseISO, format } from 'date-fns';
-import '../app/dashboard/users/users.scss';
 import { Eye, UserCheck, UserMinus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import UserListSkeleton from './user-list-skeleton';
+import '../app/dashboard/users/users.scss';
 
 interface User {
   id: number;
@@ -20,18 +21,27 @@ export default function UserList() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [activeModal, setActiveModal] = useState<number | null>(null); // which user’s modal is open
+  const [activeModal, setActiveModal] = useState<number | null>(null);
   const usersPerPage = 10;
-
-  const API = process.env.NEXT_PUBLIC_API_URL;
+  const API = process.env.NEXT_PUBLIC_API_URL!;
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    fetch(API!)
+    const cachedUsers = localStorage.getItem('users');
+    if (cachedUsers) {
+      setUsers(JSON.parse(cachedUsers));
+      setLoading(false);
+    }
+
+    // Fetch fresh data anyway (revalidate)
+    fetch(API)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
         setLoading(false);
+        localStorage.setItem('users', JSON.stringify(data));
+        console.log('Data refetched');
       })
       .catch((err) => {
         console.error('Error fetching users:', err);
@@ -39,15 +49,14 @@ export default function UserList() {
       });
   }, [API]);
 
-  // Close modal on outside click
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const closeModal = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         setActiveModal(null);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', closeModal);
+    return () => document.removeEventListener('mousedown', closeModal);
   }, []);
 
   if (loading) return <UserListSkeleton />;
@@ -63,7 +72,7 @@ export default function UserList() {
     setCurrentPage(page);
   };
 
-  // Format date
+  // Date formatting
   const formatDate = (dateString: string) => {
     if (!dateString) return '—';
     const cleaned = dateString.replace(
@@ -71,11 +80,17 @@ export default function UserList() {
       '01'
     );
     try {
-      const parsedDate = parseISO(cleaned);
-      return format(parsedDate, 'MMM d, yyyy h:mm a');
+      const parsed = parseISO(cleaned);
+      return format(parsed, 'MMM d, yyyy h:mm a');
     } catch {
       return 'Invalid Date';
     }
+  };
+
+  // Navigate to user details page
+  const viewUserDetails = (user: User) => {
+    localStorage.setItem('selectedUser', JSON.stringify(user));
+    router.push(`/dashboard/users/${user.id}`);
   };
 
   return (
@@ -99,8 +114,7 @@ export default function UserList() {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.phoneNumber}</td>
-              <td>{formatDate(user.dateJoined)}</td>
-
+              <td className='trauncate'>{formatDate(user.dateJoined)}</td>
               <td>
                 <span className={`status ${user.status.toLowerCase()}`}>
                   {user.status}
@@ -109,14 +123,15 @@ export default function UserList() {
               <td style={{ position: 'relative' }}>
                 <BsThreeDotsVertical
                   className='dots'
-                  onClick={() =>
-                    setActiveModal(activeModal === user.id ? null : user.id)
-                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveModal(activeModal === user.id ? null : user.id);
+                  }}
                 />
 
                 {activeModal === user.id && (
                   <div ref={modalRef} className='dropdown-modal'>
-                    <button onClick={() => alert(`View ${user.username}`)}>
+                    <button onClick={() => viewUserDetails(user)}>
                       <Eye size={15} />
                       View Details
                     </button>
@@ -150,7 +165,6 @@ export default function UserList() {
           >
             Previous
           </button>
-
           <button
             className='page-button'
             onClick={() => goToPage(currentPage + 1)}

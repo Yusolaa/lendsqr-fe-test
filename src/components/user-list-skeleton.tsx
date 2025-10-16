@@ -1,5 +1,5 @@
 import React from 'react';
-import '../app/dashboard/users/users.scss';
+import './user-list-skeleton.scss';
 
 export default function UserListSkeleton() {
   return (

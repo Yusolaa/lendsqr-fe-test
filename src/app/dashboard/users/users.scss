@@ -231,37 +231,3 @@
     cursor: not-allowed;
   }
 }
-
-.skeleton-table {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #e5e5e5;
-  padding: 1rem;
-
-  .skeleton-row {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0.75rem;
-  }
-
-  .skeleton-cell {
-    height: 1.1rem;
-    border-radius: 6px;
-    background: linear-gradient(90deg, #f6f7f8, #edeef1, #f6f7f8);
-    background-size: 200% 100%;
-    animation: shimmer 1.3s infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
-}
