@@ -62,7 +62,7 @@ const navData = {
     {
       title: 'Guarantors',
       icon: UsersRound,
-      url: '/dashboard/guarantors',
+      url: '#',
     },
     {
       title: 'Loans',
