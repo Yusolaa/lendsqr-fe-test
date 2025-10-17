@@ -14,21 +14,18 @@ export function HeaderComponent({
   return (
     <header className='app-header'>
       <div className='header-content'>
-        {/* Search Form */}
-        <div>
-          <form className='search-bar'>
-            <div className='search-wrapper'>
-              <input
-                type='search'
-                placeholder='Search for anything'
-                className='search-input'
-              />
-              <button type='submit' className='search-button'>
-                <Search className='search-icon' />
-              </button>
-            </div>
-          </form>
-        </div>
+        <form className='search-bar'>
+          <div className='search-wrapper'>
+            <input
+              type='search'
+              placeholder='Search for anything'
+              className='search-input'
+            />
+            <button type='submit' className='search-button'>
+              <Search className='search-icon' />
+            </button>
+          </div>
+        </form>
 
         {/* Right Side Actions */}
         <div className='header-actions'>
@@ -44,8 +41,8 @@ export function HeaderComponent({
                 <Image
                   src={userAvatar}
                   alt={userName}
-                  width={40}
-                  height={40}
+                  width={30}
+                  height={30}
                   className='avatar-image'
                 />
               ) : (

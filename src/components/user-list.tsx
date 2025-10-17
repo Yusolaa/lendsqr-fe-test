@@ -125,7 +125,7 @@ export default function UserList() {
   };
 
   const viewUserDetails = (user: User) => {
-    localStorage.setItem('selectedUser', JSON.stringify(user));
+    localStorage.setItem('selectedUserId', user.id.toString());
     router.push(`/dashboard/users/${user.id}`);
   };
 

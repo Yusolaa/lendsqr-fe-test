@@ -53,9 +53,12 @@ const UserDetails = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('selectedUser');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
+    const userId = localStorage.getItem('selectedUserId');
+    const allUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const foundUser = allUsers.find((u: User) => u.id.toString() === userId);
+
+    if (foundUser) {
+      setUser(foundUser);
     } else {
       router.push('/dashboard/users');
     }
