@@ -285,7 +285,7 @@ $green: #39cdcc;
 
 @media (max-width: 768px) {
   .user-details-page {
-    padding: 1rem;
+    // padding: 1rem;
 
     .page-header {
       flex-direction: column;
@@ -310,16 +310,11 @@ $green: #39cdcc;
     .user-info-section {
       flex-direction: column;
       align-items: flex-start;
-      padding: 1.5rem 1rem;
 
       .user-avatar {
         width: 5rem;
         height: 5rem;
       }
-    }
-
-    .details-content {
-      padding: 1.5rem 1rem;
     }
 
     .info-section {
